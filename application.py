@@ -34,6 +34,7 @@ def index():
 def login():
     if request.method == 'POST':
         pass
+    return render_template('login.html')
 
 
 @app.route("/register", methods=["GET", "POST"])
