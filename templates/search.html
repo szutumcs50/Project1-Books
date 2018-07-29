@@ -1,0 +1,12 @@
+{% extends "layout.html" %} {% block body %}
+<div class="container">
+  <h1>SERACH</h1>
+    <form action="/search" method="post">
+        <div class="form-group">
+
+            <input type="text" name="search" class="form-control" placeholder="...">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}

@@ -47,3 +47,19 @@ def register():
         db.execute("INSERT INTO users (login, password) VALUES (:login,:password)", {'login':login, 'password':hash})
         db.commit()
     return render_template("register.html")
+
+@app.route("/books")
+def books():
+    rows = db.execute("SELECT * FROM books LIMIT 50")
+    return render_template('list.html', rows=rows)
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    if request.method == 'POST':
+        q = request.form['search']
+        q = "%" + q + "%"
+        rows = db.execute("SELECT * FROM books WHERE isbn LIKE :isbn OR title LIKE :title OR author LIKE :author OR year LIKE :year",
+                            {'isbn':q, 'title':q, 'author':q, 'year':q})
+        #rows = db.execute("SELECT * FROM books WHERE title LIKE :title", {'title':qq})
+        return render_template("list.html", rows=rows)
+    return render_template('search.html')

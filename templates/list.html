@@ -1,7 +1,7 @@
 {% extends "layout.html" %} {% block body %}
 <ul>
     {% for row in rows %}
-        <li>Login: {{row['login']}} Password: {{row['password']}}</li>    
+        <li>ISBN: {{row['isbn']}} AUTHOR: {{row['author']}} TITLE: {{row['title']}} YEAR: {{row['year']}}</li>    
     {% endfor %}
 </ul>
 
