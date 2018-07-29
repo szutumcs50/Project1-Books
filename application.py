@@ -30,6 +30,12 @@ db = scoped_session(sessionmaker(bind=engine))
 def index():
     return render_template("index.html")
 
+@app.route("/login")
+def login():
+    if request.method == 'POST':
+        pass
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == 'POST':
