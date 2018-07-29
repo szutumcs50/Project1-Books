@@ -1,0 +1,8 @@
+{% extends "layout.html" %} {% block body %}
+<ul>
+    {% for row in rows %}
+        <li>Login: {{row['login']}} Password: {{row['password']}}</li>    
+    {% endfor %}
+</ul>
+
+{% endblock %}

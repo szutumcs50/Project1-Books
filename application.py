@@ -1,12 +1,10 @@
 import os
 
-from flask import Flask, session, request, render_template
+from flask import Flask, session, request, render_template, redirect
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
-import requests
-import json
-
+from werkzeug.security import check_password_hash, generate_password_hash
 
 #key: vhneXzU3MarEL32SDgrw
 app = Flask(__name__)
@@ -36,7 +34,9 @@ def index():
 def register():
     if request.method == 'POST':
         login = request.form['login']
-        print(login)
         password = request.form['password']
-        print(f"Login:{login} Password:{password}")
+        hash = generate_password_hash(password)
+        print(f"Username: {login} Password: {password}\nHash: {hash}")
+        db.execute("INSERT INTO users (login, password) VALUES (:login,:password)", {'login':login, 'password':hash})
+        db.commit()
     return render_template("register.html")
